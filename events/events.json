@@ -1,0 +1,58 @@
+{
+  "timezone": "America/Los_Angeles",
+  "horizonWeeks": 8,
+  "events": [
+    {
+      "id": "sunday-service",
+      "title": "Sunday Service",
+      "type": "recurring",
+      "freq": "weekly",
+      "byDay": "SU",
+      "startTime": "18:00",
+      "endTime": "21:00",
+      "location": "Spokane Valley Baptist Church, 1222 S McDonald Rd, Spokane Valley, WA 99216",
+      "url": "/events/sunday-service/",
+      "exceptions": [],
+      "list": true,
+      "mapUrl": "https://maps.apple.com/?q=1222+S+McDonald+Rd+Spokane+Valley+WA+99216"
+    },
+    {
+      "id": "corporate-night-prayer",
+      "title": "Friday Prayer Night",
+      "type": "recurring",
+      "freq": "weekly",
+      "byDay": "FR",
+      "startTime": "20:00",
+      "endTime": null,
+      "location": "Spokane Valley Baptist Church, 1222 S McDonald Rd, Spokane Valley, WA 99216",
+      "exceptions": [],
+      "list": true,
+      "mapUrl": "https://maps.apple.com/?q=1222+S+McDonald+Rd+Spokane+Valley+WA+99216"
+    },
+    {
+      "id": "wednesday-prayer",
+      "title": "Wednesday Prayer",
+      "type": "recurring",
+      "freq": "weekly",
+      "byDay": "WE",
+      "startTime": "06:00",
+      "endTime": null,
+      "location": "Spokane Valley Baptist Church, 1222 S McDonald Rd, Spokane Valley, WA 99216",
+      "exceptions": [],
+      "list": false,
+      "mapUrl": "https://maps.apple.com/?q=1222+S+McDonald+Rd+Spokane+Valley+WA+99216"
+    },
+    {
+      "id": "evangelism-outreach-2026-11-21",
+      "title": "Evangelism Day",
+      "type": "one-off",
+      "date": "2026-11-21",
+      "startTime": "10:00",
+      "endTime": null,
+      "location": "My Fresh Basket, Kendall Yards, 1030 W Summit Pkwy, Spokane, WA 99201",
+      "description": "Arrive at 10:00 AM. The meeting starts at 10:15 AM sharp, then we split into groups and head out.",
+      "list": true,
+      "mapUrl": "https://maps.apple.com/?q=1030+W+Summit+Pkwy+Spokane+WA+99201"
+    }
+  ]
+}

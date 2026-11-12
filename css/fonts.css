@@ -1,0 +1,43 @@
+/* Self-hosted Lato (static) and Montserrat (variable) — SIL Open Font License, latin subset. */
+@font-face {
+  font-family: 'Lato';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/lato-400-italic.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url('../assets/fonts/lato-300-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('../assets/fonts/lato-400-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('../assets/fonts/lato-700-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('../assets/fonts/lato-900-normal.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url('../assets/fonts/montserrat.woff2') format('woff2');
+}

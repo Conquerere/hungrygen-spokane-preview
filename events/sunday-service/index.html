@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+  HungryGen Spokane — Sunday Service event page (v2 design).
+  Countdown, .ics, and Google Calendar links retained.
+-->
+<head>
+  <meta charset="utf-8">
+  <!-- Required for mobile layout and accessibility. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Sunday Service in Spokane Valley | HungryGen Spokane</title>
+  <!-- Unique, 50–60 characters. Home: "HungryGen Spokane | Church in Spokane Valley, Washington". Other pages: "Topic | HungryGen Spokane". -->
+
+  <meta name="description" content="Join Sunday Service at HungryGen Spokane, 6:00 PM at Spokane Valley Baptist Church, 1222 S McDonald Rd, Spokane Valley, WA 99216. All are welcome.">
+  <!-- Unique, 140–160 characters. Use only verified facts (mission, address, phone, confirmed times). Do not mention the removed monthly Prayerline. -->
+
+  <link rel="canonical" href="https://hungrygenspokane.com/events/sunday-service/">
+  <!-- Absolute https://hungrygenspokane.com/... URL, apex (no www), trailing slash. Home: https://hungrygenspokane.com/. Do not use /give/ as a canonical; that path 302s to Church Center. -->
+
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Sunday Service in Spokane Valley | HungryGen Spokane">
+  <meta property="og:description" content="Join Sunday Service at HungryGen Spokane, 6:00 PM at Spokane Valley Baptist Church, 1222 S McDonald Rd, Spokane Valley, WA 99216. All are welcome.">
+  <meta property="og:image" content="https://hungrygenspokane.com/assets/img/og-image.jpg">
+  <!-- Absolute HTTPS URL to a 1200×630 share image in /assets/, not a wp-content path. -->
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="HungryGen Spokane circular HG monogram with the word SPOKANE.">
+  <!-- Short text description of the share image, e.g. HungryGen Spokane. -->
+  <meta property="og:url" content="https://hungrygenspokane.com/events/sunday-service/">
+  <!-- Must match the canonical URL. -->
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="HungryGen Spokane">
+  <meta property="og:locale" content="en_US">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sunday Service in Spokane Valley | HungryGen Spokane">
+  <meta name="twitter:description" content="Join Sunday Service at HungryGen Spokane, 6:00 PM at Spokane Valley Baptist Church, 1222 S McDonald Rd, Spokane Valley, WA 99216. All are welcome.">
+  <meta name="twitter:image" content="https://hungrygenspokane.com/assets/img/og-image.jpg">
+
+  <!-- Favicon and touch icons. Logo, favicon, and OG image are approved. -->
+  <link rel="icon" href="/hungrygen-spokane-preview/assets/img/icons/favicon-32.webp" sizes="32x32">
+  <link rel="icon" href="/hungrygen-spokane-preview/assets/img/icons/favicon-192.webp" sizes="192x192">
+  <link rel="apple-touch-icon" href="/hungrygen-spokane-preview/assets/img/icons/apple-touch-icon.png">
+
+  <meta name="theme-color" content="#2b343b">
+  <!-- Confirmed from the live site, Nov 11, 2026. -->
+
+  <!-- Preload only the LCP/hero image on pages that have one. Remove this link on pages without a hero image. -->
+  <!-- Preload the LCP/hero image. -->
+  <link rel="preload" as="image" href="/hungrygen-spokane-preview/assets/img/slider/hg-spokane-00010.webp" imagesrcset="/hungrygen-spokane-preview/assets/img/slider/hg-spokane-00010.webp 1080w, /hungrygen-spokane-preview/assets/img/gallery/hg-spokane-00010.webp 2000w" imagesizes="100vw" fetchpriority="high">
+
+  <!--
+    JSON-LD: Church + three recurring Events (Sunday Service, Wednesday Prayer,
+    Friday Prayer Night — Elijah, Nov 11, 2026, 10:53 PM; replaces the old
+    "Corporate Night Prayer" name and its unconfirmed 8:00-10:00 PM window)
+    + one one-off Event, Evangelism Day on Sat Nov 21, 2026.
+    Church.location and each recurring Event.location use Place name
+    "Spokane Valley Baptist Church" with the verified address (ZIP 99216).
+    Evangelism Day is the exception: it meets at My Fresh Basket (Kendall Yards).
+    sameAs: Spokane only — https://www.youtube.com/@HungryGenSpokane and Instagram.
+    Never use the old Subscribe channel ID (it is HungryGen Everett; see FACTS.md).
+    Do not add endTime or geo (exception: /events/sunday-service/ keeps
+    endTime 21:00:00 to match its 6:00-9:00 PM page copy, per Site Lead).
+    No holiday exceptions: never add exceptDate (Elijah, Nov 11, 2026).
+    Do not add monthly Prayerline events.
+    Connect Groups (youth): no Event schema — see the note after this script.
+    Serve Team Party and the Dec 19 outreach were removed (Elijah, Nov 11, 2026); never add them.
+    Sunday Service url is the shipped permalink /events/sunday-service/.
+    Wednesday Prayer url is https://hungrygenspokane.com/ (no ministries page yet).
+    Friday Prayer Night url is https://hungrygenspokane.com/events/ (no page of its own).
+    Friday Prayer Night has no endTime (none given). Its venue, Spokane Valley
+    Baptist Church, is CONFIRMED (Elijah, Nov 11, 2026, 11:08 PM, FACTS.md).
+  -->
+  <!--
+    ============================================================
+    REMOVE AFTER NOV 21, 2026: the Evangelism Day Event
+    (@id #event-evangelism-day-2026-11-21) AND its entry in Church.event.
+    Delete both on Sun Nov 22, 2026, on every page. A past one-off Event
+    left in the graph is stale data. Re-add a new dated object only when
+    Elijah announces the next outreach date and place (never Dec 19 or an
+    assumed third-Saturday pattern).
+    Evangelism Day facts (FACTS.md, Elijah, Nov 11, 2026): Sat Nov 21, 2026,
+    arrive 10:00 AM, meeting starts 10:15 AM sharp, no end time (so no
+    endDate). startDate uses the 10:00 AM arrival, which matches the time
+    shown on /events/ (the 10:15 start is in the description). Place: My Fresh
+    Basket, Kendall Yards, 1030 W Summit Pkwy, Spokane, WA 99201 (FACTS.md,
+    11:08 PM). -08:00 is correct for PST on Nov 21.
+    ============================================================
+  -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Church",
+        "@id": "https://hungrygenspokane.com/#church",
+        "name": "HungryGen Spokane",
+        "alternateName": "Hungry Gen Spokane",
+        "url": "https://hungrygenspokane.com/",
+        "logo": "https://hungrygenspokane.com/assets/img/logo-hungrygen.png",
+        "image": "https://hungrygenspokane.com/assets/img/og-image.jpg",
+        "telephone": "+1-509-818-0560",
+        "description": "We exist to lead people to encounter God daily. Sunday Service 6:00 PM. Wednesday Prayer 6:00 AM. Friday Prayer Night 8:00 PM. Youth meet in Connect Groups.",
+        "sameAs": [
+          "https://www.youtube.com/@HungryGenSpokane",
+          "https://www.instagram.com/hungrygenspokane/"
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "1222 S McDonald Rd",
+          "addressLocality": "Spokane Valley",
+          "addressRegion": "WA",
+          "postalCode": "99216",
+          "addressCountry": "US"
+        },
+        "location": {
+          "@type": "Place",
+          "name": "Spokane Valley Baptist Church",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1222 S McDonald Rd",
+            "addressLocality": "Spokane Valley",
+            "addressRegion": "WA",
+            "postalCode": "99216",
+            "addressCountry": "US"
+          }
+        },
+        "event": [
+          { "@id": "https://hungrygenspokane.com/#event-sunday-service" },
+          { "@id": "https://hungrygenspokane.com/#event-wednesday-prayer" },
+          { "@id": "https://hungrygenspokane.com/#event-friday-prayer-night" },
+          { "@id": "https://hungrygenspokane.com/#event-evangelism-day-2026-11-21" }
+        ]
+      },
+      {
+        "@type": "Event",
+        "@id": "https://hungrygenspokane.com/#event-sunday-service",
+        "name": "Sunday Service",
+        "url": "https://hungrygenspokane.com/events/sunday-service/",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventSchedule": {
+          "@type": "Schedule",
+          "byDay": "https://schema.org/Sunday",
+          "startTime": "18:00:00",
+          "endTime": "21:00:00",
+          "repeatFrequency": "P1W",
+          "scheduleTimezone": "America/Los_Angeles"
+        },
+        "location": {
+          "@type": "Place",
+          "name": "Spokane Valley Baptist Church",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1222 S McDonald Rd",
+            "addressLocality": "Spokane Valley",
+            "addressRegion": "WA",
+            "postalCode": "99216",
+            "addressCountry": "US"
+          }
+        },
+        "organizer": { "@id": "https://hungrygenspokane.com/#church" }
+      },
+      {
+        "@type": "Event",
+        "@id": "https://hungrygenspokane.com/#event-wednesday-prayer",
+        "name": "Wednesday Prayer",
+        "url": "https://hungrygenspokane.com/",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventSchedule": {
+          "@type": "Schedule",
+          "byDay": "https://schema.org/Wednesday",
+          "startTime": "06:00:00",
+          "repeatFrequency": "P1W",
+          "scheduleTimezone": "America/Los_Angeles"
+        },
+        "location": {
+          "@type": "Place",
+          "name": "Spokane Valley Baptist Church",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1222 S McDonald Rd",
+            "addressLocality": "Spokane Valley",
+            "addressRegion": "WA",
+            "postalCode": "99216",
+            "addressCountry": "US"
+          }
+        },
+        "organizer": { "@id": "https://hungrygenspokane.com/#church" }
+      },
+      {
+        "@type": "Event",
+        "@id": "https://hungrygenspokane.com/#event-friday-prayer-night",
+        "name": "Friday Prayer Night",
+        "url": "https://hungrygenspokane.com/events/",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "eventSchedule": {
+          "@type": "Schedule",
+          "byDay": "https://schema.org/Friday",
+          "startTime": "20:00:00",
+          "repeatFrequency": "P1W",
+          "scheduleTimezone": "America/Los_Angeles"
+        },
+        "location": {
+          "@type": "Place",
+          "name": "Spokane Valley Baptist Church",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1222 S McDonald Rd",
+            "addressLocality": "Spokane Valley",
+            "addressRegion": "WA",
+            "postalCode": "99216",
+            "addressCountry": "US"
+          }
+        },
+        "organizer": { "@id": "https://hungrygenspokane.com/#church" }
+      },
+      {
+        "@type": "Event",
+        "@id": "https://hungrygenspokane.com/#event-evangelism-day-2026-11-21",
+        "name": "Evangelism Day",
+        "description": "Arrive at 10:00 AM. The meeting starts at 10:15 AM sharp, then groups split up and head out.",
+        "url": "https://hungrygenspokane.com/events/",
+        "startDate": "2026-11-21T10:00:00-08:00",
+        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+        "eventStatus": "https://schema.org/EventScheduled",
+        "location": {
+          "@type": "Place",
+          "name": "My Fresh Basket",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "1030 W Summit Pkwy",
+            "addressLocality": "Spokane",
+            "addressRegion": "WA",
+            "postalCode": "99201",
+            "addressCountry": "US"
+          }
+        },
+        "organizer": { "@id": "https://hungrygenspokane.com/#church" }
+      }
+    ]
+  }
+  </script>
+  <!--
+    No Event schema for youth Connect Groups (Elijah, Nov 11, 2026, 11:08 PM,
+    FACTS.md): groups meet on different days and times, and youth is not on the
+    events calendar. Never add a day, time, or venue for them. The Church
+    description says only
+    "Youth meet in Connect Groups." The sign-up links (Simon's group for boys,
+    Bella's group for girls) belong in page copy, not schema.
+  -->
+<link rel="preload" as="font" type="font/woff2" href="/hungrygen-spokane-preview/assets/fonts/montserrat.woff2" crossorigin>
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="stylesheet" href="/hungrygen-spokane-preview/css/fonts.css">
+  <link rel="stylesheet" href="/hungrygen-spokane-preview/css/styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header" role="banner">
+    <div class="wrap header-inner">
+      <a class="logo" href="https://hungrygen.com" target="_blank" rel="noopener noreferrer">
+        <img src="/hungrygen-spokane-preview/assets/img/logo-hungrygen-header.webp" width="340" height="98" alt="HungryGen.com (opens in a new tab)">
+      </a>
+      <nav class="nav-primary" aria-label="Primary">
+        <a href="/hungrygen-spokane-preview/#visit">Plan a visit</a>
+        <a href="/hungrygen-spokane-preview/events/" aria-current="true">Events</a>
+        <a href="https://hungrygenspokane.churchcenter.com/giving" target="_blank" rel="noopener noreferrer">Give</a>
+      </nav>
+      <div class="header-actions">
+        <a class="social-link" href="https://www.youtube.com/@HungryGenSpokane" target="_blank" rel="noopener noreferrer" aria-label="HungryGen Spokane on YouTube"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.8 15.6V8.4L15.8 12l-6 3.6z"/></svg></a>
+        <a class="social-link" href="https://www.instagram.com/hungrygenspokane/" target="_blank" rel="noopener noreferrer" aria-label="HungryGen Spokane on Instagram"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 7.2A4.8 4.8 0 1 0 16.8 12 4.8 4.8 0 0 0 12 7.2zm0 7.9A3.1 3.1 0 1 1 15.1 12 3.1 3.1 0 0 1 12 15.1zM17.5 6.9a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1zM12 4.8c1.5 0 1.7 0 2.3.1a4 4 0 0 1 1.4.3 3.2 3.2 0 0 1 1.8 1.8 4 4 0 0 1 .3 1.4c.1.6.1.8.1 2.3s0 1.7-.1 2.3a4 4 0 0 1-.3 1.4 3.2 3.2 0 0 1-1.8 1.8 4 4 0 0 1-1.4.3c-.6.1-.8.1-2.3.1s-1.7 0-2.3-.1a4 4 0 0 1-1.4-.3 3.2 3.2 0 0 1-1.8-1.8 4 4 0 0 1-.3-1.4C4.8 13.7 4.8 13.5 4.8 12s0-1.7.1-2.3a4 4 0 0 1 .3-1.4 3.2 3.2 0 0 1 1.8-1.8 4 4 0 0 1 1.4-.3C10.3 4.8 10.5 4.8 12 4.8m0-1.8c-1.5 0-1.7 0-2.4.1A6 6 0 0 0 7.7 3.5 5 5 0 0 0 4.9 6.3 6 6 0 0 0 4.5 8c-.1.7-.1.9-.1 2.4s0 1.7.1 2.4a6 6 0 0 0 .4 1.6 5 5 0 0 0 2.8 2.8 6 6 0 0 0 1.6.4c.7.1.9.1 2.4.1s1.7 0 2.4-.1a6 6 0 0 0 1.6-.4 5 5 0 0 0 2.8-2.8 6 6 0 0 0 .4-1.6c.1-.7.1-.9.1-2.4s0-1.7-.1-2.4a6 6 0 0 0-.4-1.6 5 5 0 0 0-2.8-2.8 6 6 0 0 0-1.6-.4C13.7 3 13.5 3 12 3z"/></svg></a>
+        <a class="btn btn-primary header-cta" href="/hungrygen-spokane-preview/#visit">Plan a visit</a>
+        <button type="button" class="menu-toggle" id="menu-toggle" aria-controls="mobile-nav" aria-expanded="false" aria-label="Open menu"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"/></svg></button>
+      </div>
+    </div>
+    <div class="nav-backdrop" id="nav-backdrop" hidden></div>
+    <nav class="nav-drawer" id="mobile-nav" aria-label="Mobile" hidden>
+      <div class="wrap">
+        <a href="/hungrygen-spokane-preview/events/" aria-current="true">Events</a>
+        <a href="https://hungrygenspokane.churchcenter.com/giving" target="_blank" rel="noopener noreferrer">Give</a>
+        <a class="btn btn-primary drawer-cta" href="/hungrygen-spokane-preview/#visit">Plan a visit</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <div class="wrap page-event">
+      <div class="event-layout">
+        <h1 class="event-detail-title">Sunday Service</h1>
+        <figure class="event-detail-photo">
+          <img src="/hungrygen-spokane-preview/assets/img/slider/hg-spokane-00010.webp" srcset="/hungrygen-spokane-preview/assets/img/slider/hg-spokane-00010.webp 1080w, /hungrygen-spokane-preview/assets/img/gallery/hg-spokane-00010.webp 2000w" sizes="100vw" width="1080" height="720" alt="People worshiping together at a HungryGen Spokane Sunday service." loading="eager" decoding="async" fetchpriority="high">
+        </figure>
+        <div class="event-export">
+          <a class="btn-cal" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Sunday+Service&dates=20261115T180000/20261115T210000&ctz=America/Los_Angeles&details=Sunday+Service&location=Spokane+Valley+Baptist+Church%2C+1222+S+McDonald+Rd%2C+Spokane+Valley%2C+WA+99216%2C+USA&recur=RRULE%3AFREQ%3DWEEKLY" target="_blank" rel="noopener noreferrer">+ Add to Google Calendar</a>
+          <a class="btn-cal" href="/hungrygen-spokane-preview/events/sunday-service/sunday-service.ics">+ iCal / Outlook export</a>
+        </div>
+
+        <div class="event-countdown" data-countdown data-datetime="2026-11-15T18:00:00-08:00">
+          <p class="sr-only" data-countdown-status aria-live="polite"></p>
+          <ul class="countdown">
+            <li><span class="countdown__value" data-days>00</span><p class="countdown__label">days</p></li>
+            <li><span class="countdown__value" data-hours>00</span><p class="countdown__label">hours</p></li>
+            <li><span class="countdown__value" data-minutes>00</span><p class="countdown__label">minutes</p></li>
+            <li><span class="countdown__value" data-seconds>00</span><p class="countdown__label">seconds</p></li>
+          </ul>
+        </div>
+
+        <aside class="event-meta" aria-label="Event details">
+          <div class="event-meta-block">
+            <svg class="meta-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 9h18M8 3v4M16 3v4"/></svg>
+            <div>
+              <p class="event-meta-label">Date</p>
+              <p class="event-meta-value">Nov 15 2026</p>
+            </div>
+          </div>
+          <div class="event-meta-block">
+            <svg class="meta-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M12 8v4.5l3 2"/></svg>
+            <div>
+              <p class="event-meta-label">Time</p>
+              <p class="event-meta-value">6:00 pm - 9:00 pm</p>
+            </div>
+          </div>
+          <div class="event-meta-block">
+            <svg class="meta-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 21s6.5-6.1 6.5-11A6.5 6.5 0 0 0 5.5 10c0 4.9 6.5 11 6.5 11z"/><circle cx="12" cy="10" r="2.2" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+            <div>
+              <p class="event-meta-label">Location</p>
+              <p class="event-meta-value event-meta-value--venue">Spokane Valley Baptist Church</p>
+              <p class="event-meta-value event-meta-value--address">1222 S McDonald Rd, Spokane Valley, WA 99216</p>
+            </div>
+          </div>
+        </aside>
+
+        <section class="event-next" aria-labelledby="next-occurrence-heading">
+          <h2 id="next-occurrence-heading" class="event-box-title">Next Occurrence</h2>
+          <div class="event-meta-block">
+            <svg class="meta-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M3 9h18M8 3v4M16 3v4"/></svg>
+            <div>
+              <p class="event-meta-label">Date</p>
+              <p class="event-meta-value">Nov 22 2026</p>
+            </div>
+          </div>
+          <div class="event-meta-block" style="margin-top:1rem">
+            <svg class="meta-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M12 8v4.5l3 2"/></svg>
+            <div>
+              <p class="event-meta-label">Time</p>
+              <p class="event-meta-value">6:00 pm - 9:00 pm</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="event-sharebox" aria-labelledby="share-event-heading">
+          <h2 id="share-event-heading" class="event-box-title">Share this event</h2>
+          <ul class="share-list share-list--icons"><li><a class="share-link share-link--facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fhungrygenspokane.com%2Fevents%2Fsunday-service%2F" target="_blank" rel="noopener noreferrer" aria-label="Share Sunday Service on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14.5 8.5h2.7V5h-2.7C12 5 10 7 10 9.5V11H8v3.5h2V20h3.5v-5.5h2.4l.6-3.5H13.5V9.5c0-.6.4-1 1-1z"/></svg></a></li><li><a class="share-link share-link--twitter" href="https://x.com/intent/tweet?url=https%3A%2F%2Fhungrygenspokane.com%2Fevents%2Fsunday-service%2F" target="_blank" rel="noopener noreferrer" aria-label="Share Sunday Service on Twitter"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M14.7 10.3 21 3h-1.9l-5.5 6.3L9.3 3H3.5l6.7 9.7L3.5 21h1.9l6-6.8L14.7 21h5.8l-5.8-10.7zM11.9 13.2l-.7-1-5.5-7.8h2.4l4.4 6.3.7 1 5.8 8.2h-2.4l-4.7-6.7z"/></svg></a></li><li><a class="share-link share-link--linkedin" href="https://www.linkedin.com/shareArticle?mini=true&url=https%3A%2F%2Fhungrygenspokane.com%2Fevents%2Fsunday-service%2F" target="_blank" rel="noopener noreferrer" aria-label="Share Sunday Service on Linkedin"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M6.5 9H4V20h2.5V9zM5.2 4A1.5 1.5 0 1 0 5.2 7 1.5 1.5 0 0 0 5.2 4zM20 20h-2.5v-5.8c0-1.6-.6-2.5-1.9-2.5-1 0-1.6.7-1.8 1.3-.1.2-.1.6-.1.9V20H11V9h2.5v1.5c.4-.7 1.3-1.8 3.2-1.8 2.3 0 4 1.5 4 4.8V20z"/></svg></a></li><li><a class="share-link share-link--vk" href="https://vk.com/share.php?url=https%3A%2F%2Fhungrygenspokane.com%2Fevents%2Fsunday-service%2F" target="_blank" rel="noopener noreferrer" aria-label="Share Sunday Service on VK"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M3.5 7.5h2.2s.1 3.4 2.1 3.9c0 0 1-1.9 2.3-3.9h2.3s-2.3 3.4-2.3 4.1 2.5 2.6 2.5 2.6l2.5-2.6s.9-1.3 1.3-1.3.8.2 1.2 1.2c.4 1 .8 2.4.8 2.4s1.7-1.3 2.4-3.8c0 0 .5-1.5-.3-1.7H20s-1.9 4.1-2.6 5.1c0 0-.8 1.1-1.1 1.1s-.6-.3-1.1-1C14.6 13 13 10 13 10s-.3 3.3-.3 3.8c0 .2-.3 1-1.1 1S10 14 8.3 11.6C6.6 9.2 5.4 6.2 3.5 7.5z"/></svg></a></li><li><a class="share-link share-link--whatsapp" href="https://api.whatsapp.com/send?text=https%3A%2F%2Fhungrygenspokane.com%2Fevents%2Fsunday-service%2F" target="_blank" rel="noopener noreferrer" aria-label="Share Sunday Service on WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 3.2A8.8 8.8 0 0 0 4.8 16.3L3.5 20.5l4.3-1.3A8.8 8.8 0 1 0 12 3.2zm0 16a7.2 7.2 0 0 1-3.7-1l-.3-.2-2.6.8.8-2.5-.2-.3A7.2 7.2 0 1 1 12 19.2zm4-5.3c-.2-.1-1.3-.6-1.5-.7s-.3-.1-.5.1-.6.7-.7.8-.3.2-.5.1a5.8 5.8 0 0 1-1.7-1 6.3 6.3 0 0 1-1.2-1.5c-.1-.2 0-.3.1-.4l.3-.4.1-.2c0-.1 0-.2 0-.3s-.5-1.1-.6-1.5-.3-.3-.5-.3h-.4c-.1 0-.3.1-.5.3s-.6.6-.6 1.5.6 1.8.7 1.9 1.3 2 3.2 2.8a9 9 0 0 0 1.4.5 3.3 3.3 0 0 0 1.5.1c.5-.1 1.3-.5 1.5-1.1s.2-1 .1-1.1c-.1 0-.2-.1-.4-.2z"/></svg></a></li><li><a class="share-link share-link--telegram" href="https://t.me/share/url?url=https%3A%2F%2Fhungrygenspokane.com%2Fevents%2Fsunday-service%2F" target="_blank" rel="noopener noreferrer" aria-label="Share Sunday Service on Telegram"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20.2 5.2 3.8 11.4c-1.1.4-1.1 1.1-.2 1.4l4.2 1.3 1.6 5c.2.6.4.8 1 .8.5 0 .7-.2 1-.6l2.2-2.3 4.6 3.4c.8.5 1.4.2 1.6-.8l2.9-13.5c.3-1.2-.4-1.7-1.5-1.2zM9.6 13.6l8.2-5.1c.4-.3.8-.1.5.2l-6.7 6.1-.3 2.8-1.7-4z"/></svg></a></li><li><a class="share-link share-link--email" href="mailto:?subject=Sunday%20Service&body=https%3A%2F%2Fhungrygenspokane.com%2Fevents%2Fsunday-service%2F" target="_blank" rel="noopener noreferrer" aria-label="Share Sunday Service on Email"><svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M20 6H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1zm-1.2 1.5-6.3 4.5a.8.8 0 0 1-.9 0L5.3 7.5h13.5zM5 16.5V8.8l6.5 4.6a1.8 1.8 0 0 0 2 0L20 8.8v7.7H5z"/></svg></a></li></ul>
+        </section>
+
+        <figure class="event-map">
+          <a href="https://maps.apple.com/?q=1222+S+McDonald+Rd+Spokane+Valley+WA+99216" target="_blank" rel="noopener noreferrer">
+            <img src="/hungrygen-spokane-preview/assets/img/venue-map.jpg" width="768" height="500" alt="Map showing Spokane Valley Baptist Church at 1222 S McDonald Rd, Spokane Valley, WA 99216." loading="lazy" decoding="async">
+          </a>
+          <figcaption class="event-map-caption">Spokane Valley Baptist Church, 1222 S McDonald Rd, Spokane Valley, WA 99216. Map data © OpenStreetMap contributors.</figcaption>
+        </figure>
+
+        <div class="event-qr">
+          <img src="/hungrygen-spokane-preview/assets/img/qr-sunday-service.png" width="120" height="120" alt="QR code for the HungryGen Spokane Sunday Service event." loading="lazy" decoding="async">
+        </div>
+      </div>
+    </div>
+  </main>
+
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="wrap footer-grid">
+      <div>
+        <h2>Times</h2>
+        <p class="footer-time"><strong>Sunday Service 6:00 PM</strong> every Sunday</p>
+        <p class="footer-time"><strong>Wednesday 6:00 AM</strong> Prayer</p>
+        <p class="footer-time"><strong>Friday Prayer Night 8:00 PM</strong> every Friday</p>
+        <p class="footer-time">Youth Connect Groups: <a href="https://hungrygenspokane.churchcenter.com/groups/join-a-connect-group/simon-s-group" target="_blank" rel="noopener noreferrer">Simon's group (guys)</a> · <a href="https://hungrygenspokane.churchcenter.com/groups/join-a-connect-group/bella-s-group" target="_blank" rel="noopener noreferrer">Bella's group (girls)</a></p>
+      </div>
+      <div>
+        <h2>Location</h2>
+        <p class="footer-name">Hungry Gen Spokane</p>
+        <p>Spokane Valley Baptist Church</p>
+        <p>
+          <a href="https://maps.apple.com/?q=1222+S+McDonald+Rd+Spokane+Valley+WA+99216" target="_blank" rel="noopener noreferrer">
+            1222 S McDonald Rd<br>Spokane Valley, WA 99216
+          </a>
+        </p>
+        <p><a href="tel:+15098180560">(509) 818-0560</a></p>
+      </div>
+      <div>
+        <h2>Campuses</h2>
+        <ul class="footer-campuses">
+          <li><a href="https://hungrygen.com/" target="_blank" rel="noopener noreferrer">Tri-Cities</a></li>
+          <li><a href="https://hungrygeneverett.com/" target="_blank" rel="noopener noreferrer">Everett</a></li>
+          <li><a href="/hungrygen-spokane-preview/" aria-current="true">Spokane</a></li>
+          <li><a href="https://hungrygenrenton.com/" target="_blank" rel="noopener noreferrer">Renton</a></li>
+          <li><a href="https://hungrygenyakima.com/" target="_blank" rel="noopener noreferrer">Yakima</a></li>
+          <li><a href="https://hungrygenportland.com/" target="_blank" rel="noopener noreferrer">Portland</a></li>
+          <li><a href="https://hungrygensacramento.com/" target="_blank" rel="noopener noreferrer">Sacramento</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Support</h2>
+        <ul>
+          <li><a href="https://hungrygen.com/needprayer/" target="_blank" rel="noopener noreferrer">Need Prayer?</a></li>
+          <li><a href="https://hungrygen.com/deliverance/" target="_blank" rel="noopener noreferrer">Deliverance</a></li>
+          <li><a href="https://hungrygen.com/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-social">
+        <h2>Social Media</h2>
+        <ul>
+          <li><a href="https://www.youtube.com/@HungryGenSpokane" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.8 15.6V8.4L15.8 12l-6 3.6z"/></svg> YouTube</a></li>
+          <li><a href="https://www.instagram.com/hungrygenspokane/" target="_blank" rel="noopener noreferrer"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path fill="currentColor" d="M12 7.2A4.8 4.8 0 1 0 16.8 12 4.8 4.8 0 0 0 12 7.2zm0 7.9A3.1 3.1 0 1 1 15.1 12 3.1 3.1 0 0 1 12 15.1zM17.5 6.9a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1zM12 4.8c1.5 0 1.7 0 2.3.1a4 4 0 0 1 1.4.3 3.2 3.2 0 0 1 1.8 1.8 4 4 0 0 1 .3 1.4c.1.6.1.8.1 2.3s0 1.7-.1 2.3a4 4 0 0 1-.3 1.4 3.2 3.2 0 0 1-1.8 1.8 4 4 0 0 1-1.4.3c-.6.1-.8.1-2.3.1s-1.7 0-2.3-.1a4 4 0 0 1-1.4-.3 3.2 3.2 0 0 1-1.8-1.8 4 4 0 0 1-.3-1.4C4.8 13.7 4.8 13.5 4.8 12s0-1.7.1-2.3a4 4 0 0 1 .3-1.4 3.2 3.2 0 0 1 1.8-1.8 4 4 0 0 1 1.4-.3C10.3 4.8 10.5 4.8 12 4.8m0-1.8c-1.5 0-1.7 0-2.4.1A6 6 0 0 0 7.7 3.5 5 5 0 0 0 4.9 6.3 6 6 0 0 0 4.5 8c-.1.7-.1.9-.1 2.4s0 1.7.1 2.4a6 6 0 0 0 .4 1.6 5 5 0 0 0 2.8 2.8 6 6 0 0 0 1.6.4c.7.1.9.1 2.4.1s1.7 0 2.4-.1a6 6 0 0 0 1.6-.4 5 5 0 0 0 2.8-2.8 6 6 0 0 0 .4-1.6c.1-.7.1-.9.1-2.4s0-1.7-.1-2.4a6 6 0 0 0-.4-1.6 5 5 0 0 0-2.8-2.8 6 6 0 0 0-1.6-.4C13.7 3 13.5 3 12 3z"/></svg> Instagram</a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="/hungrygen-spokane-preview/js/events.js" defer></script>
+  <script src="/hungrygen-spokane-preview/js/main.js" defer></script>
+</body>
+</html>
