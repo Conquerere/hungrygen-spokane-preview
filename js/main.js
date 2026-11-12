@@ -9,9 +9,25 @@
   var drawer = document.getElementById("mobile-nav");
   var backdrop = document.getElementById("nav-backdrop");
 
+  var lockedScrollY = 0;
+  var menuOpenedAt = 0;
+  var menuIsOpen = false;
+
   function setCondensed() {
     if (!header) return;
+    /* While the menu is open, body is position:fixed and scrollY is 0.
+       Freeze the condensed state so the header does not jump. */
+    if (menuIsOpen) return;
     header.classList.toggle("is-condensed", window.scrollY > 24);
+  }
+
+  function focusNoScroll(el) {
+    if (!el) return;
+    try {
+      el.focus({ preventScroll: true });
+    } catch (err) {
+      el.focus();
+    }
   }
 
   setCondensed();
@@ -27,8 +43,45 @@
     return items;
   }
 
-  function closeMenu() {
+  function lockScroll() {
+    lockedScrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop || 0;
+    menuIsOpen = true;
+    var b = document.body;
+    var root = document.documentElement;
+    b.classList.add("menu-open");
+    b.style.position = "fixed";
+    b.style.top = "-" + lockedScrollY + "px";
+    b.style.left = "0";
+    b.style.right = "0";
+    b.style.width = "100%";
+    b.style.overflow = "hidden";
+    root.style.overflow = "hidden";
+  }
+
+  function unlockScroll(restore) {
+    var b = document.body;
+    var root = document.documentElement;
+    var y = lockedScrollY;
+    b.classList.remove("menu-open");
+    b.style.position = "";
+    b.style.top = "";
+    b.style.left = "";
+    b.style.right = "";
+    b.style.width = "";
+    b.style.overflow = "";
+    root.style.overflow = "";
+    menuIsOpen = false;
+    if (restore !== false) {
+      window.scrollTo(0, y);
+      root.scrollTop = y;
+      b.scrollTop = 0;
+    }
+    setCondensed();
+  }
+
+  function closeMenu(opts) {
     if (!toggle || !drawer) return;
+    var restore = !opts || opts.restoreScroll !== false;
     toggle.setAttribute("aria-expanded", "false");
     drawer.hidden = true;
     drawer.classList.remove("is-open");
@@ -36,7 +89,7 @@
       backdrop.classList.remove("is-open");
       backdrop.hidden = true;
     }
-    document.body.classList.remove("menu-open");
+    unlockScroll(restore);
   }
 
   function openMenu() {
@@ -47,9 +100,10 @@
       backdrop.hidden = false;
       backdrop.classList.add("is-open");
     }
-    document.body.classList.add("menu-open");
+    lockScroll();
+    menuOpenedAt = Date.now();
     var items = focusables(drawer);
-    if (items[0]) items[0].focus();
+    if (items[0]) focusNoScroll(items[0]);
   }
 
   if (toggle && drawer) {
@@ -60,15 +114,17 @@
     });
     if (backdrop) {
       backdrop.addEventListener("click", function () {
+        /* Ignore a residual iOS click that can land on the newly opened backdrop. */
+        if (Date.now() - menuOpenedAt < 300) return;
         closeMenu();
-        toggle.focus();
+        focusNoScroll(toggle);
       });
     }
     document.addEventListener("keydown", function (e) {
       if (toggle.getAttribute("aria-expanded") !== "true") return;
       if (e.key === "Escape") {
         closeMenu();
-        toggle.focus();
+        focusNoScroll(toggle);
         return;
       }
       if (e.key !== "Tab") return;
@@ -78,14 +134,19 @@
       var last = items[items.length - 1];
       if (e.shiftKey && document.activeElement === first) {
         e.preventDefault();
-        last.focus();
+        focusNoScroll(last);
       } else if (!e.shiftKey && document.activeElement === last) {
         e.preventDefault();
-        first.focus();
+        focusNoScroll(first);
       }
     });
     drawer.querySelectorAll("a").forEach(function (link) {
-      link.addEventListener("click", closeMenu);
+      link.addEventListener("click", function () {
+        var href = link.getAttribute("href") || "";
+        /* Same-page hashes should scroll to the target, not back to the pre-open offset. */
+        var isInPageHash = href.charAt(0) === "#";
+        closeMenu({ restoreScroll: !isInPageHash });
+      });
     });
     window.addEventListener("resize", function () {
       if (window.matchMedia("(min-width: 900px)").matches) closeMenu();

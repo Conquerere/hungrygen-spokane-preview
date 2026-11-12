@@ -99,7 +99,9 @@ p.placeholder,
   display: block;
 }
 
-/* Header */
+/* Header.
+   backdrop-filter creates a containing block for position:fixed descendants,
+   so the backdrop and drawer live as siblings after the header, not inside it. */
 .site-header {
   position: sticky;
   top: 0;
@@ -109,6 +111,8 @@ p.placeholder,
   border-bottom: 1px solid var(--color-line);
   transition: box-shadow 0.2s ease, background-color 0.2s ease;
 }
+/* Keep --header-h in sync when the drawer is a sibling of the condensed header. */
+html:has(.site-header.is-condensed) { --header-h: 3.6rem; }
 .site-header.is-condensed {
   --header-h: 3.6rem;
   background: rgba(255, 255, 255, 0.98);
@@ -226,13 +230,34 @@ p.placeholder,
   background: rgba(10, 10, 10, 0.46);
 }
 .nav-backdrop.is-open { display: block; }
-body.menu-open { overflow: hidden; }
+body.menu-open {
+  overflow: hidden;
+  /* JS also sets position:fixed + top so iOS Safari cannot scroll the page. */
+}
+/* body.position:fixed; top:-scrollY would otherwise carry the sticky header
+   off-screen. Pin it to the viewport while the drawer is open. */
+body.menu-open .site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+}
 
 .nav-drawer {
   display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--header-h);
+  z-index: 45; /* above the backdrop (40), below the sticky header (50) */
   border-top: 1px solid var(--color-line);
   background: var(--color-bg);
   padding: 1rem var(--gutter) 1.5rem;
+  max-height: calc(100vh - var(--header-h));
+  max-height: calc(100dvh - var(--header-h));
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .nav-drawer.is-open { display: block; }
 .nav-drawer a {
@@ -250,6 +275,10 @@ body.menu-open { overflow: hidden; }
 }
 @media (min-width: 900px) {
   .nav-drawer { display: none !important; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .nav-drawer,
+  .nav-backdrop { transition: none; }
 }
 
 /* Buttons */
