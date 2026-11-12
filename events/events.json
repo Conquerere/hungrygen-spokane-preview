@@ -30,19 +30,6 @@
       "mapUrl": "https://maps.apple.com/?q=1222+S+McDonald+Rd+Spokane+Valley+WA+99216"
     },
     {
-      "id": "wednesday-prayer",
-      "title": "Wednesday Prayer",
-      "type": "recurring",
-      "freq": "weekly",
-      "byDay": "WE",
-      "startTime": "06:00",
-      "endTime": null,
-      "location": "Spokane Valley Baptist Church, 1222 S McDonald Rd, Spokane Valley, WA 99216",
-      "exceptions": [],
-      "list": false,
-      "mapUrl": "https://maps.apple.com/?q=1222+S+McDonald+Rd+Spokane+Valley+WA+99216"
-    },
-    {
       "id": "evangelism-outreach-2026-11-21",
       "title": "Evangelism Day",
       "type": "one-off",

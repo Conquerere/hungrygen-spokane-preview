@@ -53,9 +53,9 @@
   <link rel="preload" as="image" href="/hungrygen-spokane-preview/assets/img/slider/hg-spokane-00010.webp" imagesrcset="/hungrygen-spokane-preview/assets/img/slider/hg-spokane-00010.webp 1080w, /hungrygen-spokane-preview/assets/img/gallery/hg-spokane-00010.webp 2000w" imagesizes="100vw" fetchpriority="high">
 
   <!--
-    JSON-LD: Church + three recurring Events (Sunday Service, Wednesday Prayer,
-    Friday Prayer Night — Elijah, Nov 11, 2026, 10:53 PM; replaces the old
-    "Corporate Night Prayer" name and its unconfirmed 8:00-10:00 PM window)
+    JSON-LD: Church + two recurring Events (Sunday Service, Friday Prayer Night —
+    Elijah, Nov 11, 2026, 10:53 PM; replaces the old "Corporate Night Prayer"
+    name and its unconfirmed 8:00-10:00 PM window)
     + one one-off Event, Evangelism Day on Sat Nov 21, 2026.
     Church.location and each recurring Event.location use Place name
     "Spokane Valley Baptist Church" with the verified address (ZIP 99216).
@@ -66,10 +66,10 @@
     endTime 21:00:00 to match its 6:00-9:00 PM page copy, per Site Lead).
     No holiday exceptions: never add exceptDate (Elijah, Nov 11, 2026).
     Do not add monthly Prayerline events.
+    There is no midweek early-morning prayer (Elijah, Nov 11, 2026, 11:44 PM); never add it.
     Connect Groups (youth): no Event schema — see the note after this script.
     Serve Team Party and the Dec 19 outreach were removed (Elijah, Nov 11, 2026); never add them.
     Sunday Service url is the shipped permalink /events/sunday-service/.
-    Wednesday Prayer url is https://hungrygenspokane.com/ (no ministries page yet).
     Friday Prayer Night url is https://hungrygenspokane.com/events/ (no page of its own).
     Friday Prayer Night has no endTime (none given). Its venue, Spokane Valley
     Baptist Church, is CONFIRMED (Elijah, Nov 11, 2026, 11:08 PM, FACTS.md).
@@ -103,7 +103,7 @@
         "logo": "https://hungrygenspokane.com/assets/img/logo-hungrygen.png",
         "image": "https://hungrygenspokane.com/assets/img/og-image.jpg",
         "telephone": "+1-509-818-0560",
-        "description": "We exist to lead people to encounter God daily. Sunday Service 6:00 PM. Wednesday Prayer 6:00 AM. Friday Prayer Night 8:00 PM. Youth meet in Connect Groups.",
+        "description": "We exist to lead people to encounter God daily. Sunday Service 6:00 PM. Friday Prayer Night 8:00 PM. Youth meet in Connect Groups.",
         "sameAs": [
           "https://www.youtube.com/@HungryGenSpokane",
           "https://www.instagram.com/hungrygenspokane/"
@@ -130,7 +130,6 @@
         },
         "event": [
           { "@id": "https://hungrygenspokane.com/#event-sunday-service" },
-          { "@id": "https://hungrygenspokane.com/#event-wednesday-prayer" },
           { "@id": "https://hungrygenspokane.com/#event-friday-prayer-night" },
           { "@id": "https://hungrygenspokane.com/#event-evangelism-day-2026-11-21" }
         ]
@@ -146,34 +145,6 @@
           "@type": "Schedule",
           "byDay": "https://schema.org/Sunday",
           "startTime": "18:00:00",
-          "repeatFrequency": "P1W",
-          "scheduleTimezone": "America/Los_Angeles"
-        },
-        "location": {
-          "@type": "Place",
-          "name": "Spokane Valley Baptist Church",
-          "address": {
-            "@type": "PostalAddress",
-            "streetAddress": "1222 S McDonald Rd",
-            "addressLocality": "Spokane Valley",
-            "addressRegion": "WA",
-            "postalCode": "99216",
-            "addressCountry": "US"
-          }
-        },
-        "organizer": { "@id": "https://hungrygenspokane.com/#church" }
-      },
-      {
-        "@type": "Event",
-        "@id": "https://hungrygenspokane.com/#event-wednesday-prayer",
-        "name": "Wednesday Prayer",
-        "url": "https://hungrygenspokane.com/",
-        "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
-        "eventStatus": "https://schema.org/EventScheduled",
-        "eventSchedule": {
-          "@type": "Schedule",
-          "byDay": "https://schema.org/Wednesday",
-          "startTime": "06:00:00",
           "repeatFrequency": "P1W",
           "scheduleTimezone": "America/Los_Angeles"
         },
@@ -342,7 +313,7 @@
       <div class="wrap">
         <div class="section-intro">
           <h2 id="gather-heading">When we gather</h2>
-          <p class="section-subline">A simple weekly rhythm. Sunday service, Wednesday prayer, and Friday Prayer Night meet at Spokane Valley Baptist Church. Youth meet in Connect Groups.</p>
+          <p class="section-subline">A simple weekly rhythm. Sunday service and Friday Prayer Night meet at Spokane Valley Baptist Church. Youth meet in Connect Groups.</p>
         </div>
         <ul class="gather-cards">
           <li class="gather-card">
@@ -350,13 +321,6 @@
             <div class="gather-card__body">
               <h3>Sunday service</h3>
               <p>every Sunday at 6:00 PM</p>
-            </div>
-          </li>
-          <li class="gather-card">
-            <img src="/hungrygen-spokane-preview/assets/img/slider/hg-spokane-00004.webp" width="1080" height="720" alt="The congregation reaching forward in prayer in front of the HungryGen Spokane logo." loading="lazy" decoding="async">
-            <div class="gather-card__body">
-              <h3>Wednesday prayer</h3>
-              <p>6:00 AM</p>
             </div>
           </li>
           <li class="gather-card">
@@ -454,7 +418,7 @@
           <div class="faq-list">
             <div class="faq-item">
               <h3>Where do you meet?</h3>
-              <p>HungryGen Spokane meets at Spokane Valley Baptist Church, 1222 S McDonald Rd, Spokane Valley, WA 99216. Sunday service, Wednesday prayer, and Friday Prayer Night are here. <a href="https://maps.apple.com/?q=1222+S+McDonald+Rd+Spokane+Valley+WA+99216" target="_blank" rel="noopener noreferrer">Get directions</a>.</p>
+              <p>HungryGen Spokane meets at Spokane Valley Baptist Church, 1222 S McDonald Rd, Spokane Valley, WA 99216. Sunday service and Friday Prayer Night are here. <a href="https://maps.apple.com/?q=1222+S+McDonald+Rd+Spokane+Valley+WA+99216" target="_blank" rel="noopener noreferrer">Get directions</a>.</p>
             </div>
             <div class="faq-item">
               <h3>When is Sunday service?</h3>
@@ -466,7 +430,7 @@
             </div>
             <div class="faq-item">
               <h3>What else happens during the week?</h3>
-              <p>Wednesday prayer is at 6:00 AM. Friday Prayer Night is every Friday at 8:00 PM at Spokane Valley Baptist Church. Youth meet in Connect Groups: <a href="https://hungrygenspokane.churchcenter.com/groups/join-a-connect-group/simon-s-group" target="_blank" rel="noopener noreferrer">Simon's group for guys</a> and <a href="https://hungrygenspokane.churchcenter.com/groups/join-a-connect-group/bella-s-group" target="_blank" rel="noopener noreferrer">Bella's group for girls</a>.</p>
+              <p>Friday Prayer Night is every Friday at 8:00 PM at Spokane Valley Baptist Church. Youth meet in Connect Groups: <a href="https://hungrygenspokane.churchcenter.com/groups/join-a-connect-group/simon-s-group" target="_blank" rel="noopener noreferrer">Simon's group for guys</a> and <a href="https://hungrygenspokane.churchcenter.com/groups/join-a-connect-group/bella-s-group" target="_blank" rel="noopener noreferrer">Bella's group for girls</a>.</p>
             </div>
             <div class="faq-item">
               <h3>How can my teen get connected?</h3>
@@ -504,7 +468,6 @@
       <div>
         <h2>Times</h2>
         <p class="footer-time"><strong>Sunday Service 6:00 PM</strong> every Sunday</p>
-        <p class="footer-time"><strong>Wednesday 6:00 AM</strong> Prayer</p>
         <p class="footer-time"><strong>Friday Prayer Night 8:00 PM</strong> every Friday</p>
         <p class="footer-time">Youth Connect Groups: <a href="https://hungrygenspokane.churchcenter.com/groups/join-a-connect-group/simon-s-group" target="_blank" rel="noopener noreferrer">Simon's group (guys)</a> · <a href="https://hungrygenspokane.churchcenter.com/groups/join-a-connect-group/bella-s-group" target="_blank" rel="noopener noreferrer">Bella's group (girls)</a></p>
       </div>

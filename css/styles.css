@@ -522,13 +522,10 @@ body.menu-open { overflow: hidden; }
   margin-top: 1.75rem;
 }
 
-@media (min-width: 640px) {
-  .gather-cards { grid-template-columns: repeat(2, 1fr); }
-  .gather-card img { height: 11.5rem; }
-}
-@media (min-width: 1100px) {
-  .gather-cards { grid-template-columns: repeat(4, 1fr); }
-  .gather-card img { height: 10.5rem; }
+/* Three gather cards: stack on small screens, equal columns on desktop. */
+@media (min-width: 800px) {
+  .gather-cards { grid-template-columns: repeat(3, 1fr); }
+  .gather-card img { height: 12rem; }
 }
 
 /* Message */
