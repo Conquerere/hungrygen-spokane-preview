@@ -172,6 +172,7 @@ html:has(.site-header.is-condensed) { --header-h: 3.6rem; }
 }
 .social-link:hover,
 .social-link:focus-visible { background: var(--color-canvas); }
+.icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.125em; flex-shrink: 0; }
 .social-link .icon { width: 1.15rem; height: 1.15rem; }
 
 .menu-toggle {
