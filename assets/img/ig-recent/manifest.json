@@ -1,0 +1,44 @@
+{
+  "account": "https://www.instagram.com/hungrygenspokane/",
+  "window": "Nov 2025 \u2013 Nov 2026 (strictly newer than 1 year old)",
+  "fetched_at": "2026-11-26T03:38:00-08:00",
+  "photos_saved": 0,
+  "photos": [],
+  "status": "blocked",
+  "attempts": [
+    {
+      "method": "curl profile (Chrome 131 macOS UA)",
+      "result": "HTTP 302 to https://www.instagram.com/accounts/login/?next=...&is_from_rle, then HTTP 200 Instagram error shell (httpErrorPage / PolarisErrorRoot). Title: Instagram. No shortcodes or post dates."
+    },
+    {
+      "method": "curl web_profile_info API with X-IG-App-ID 936619743392804",
+      "url": "https://www.instagram.com/api/v1/users/web_profile_info/?username=hungrygenspokane",
+      "result": "HTTP 404, 'Page Not Found \u2022 Instagram', not-logged-in HTML (not JSON)."
+    },
+    {
+      "method": "curl public embed https://www.instagram.com/hungrygenspokane/embed/",
+      "result": "HTTP 200 but no shortcodes or taken_at data; login/signup/error shell content."
+    },
+    {
+      "method": "instaloader 4.16 anonymous (venv), --post-filter date_utc >= datetime(2025, 11, 1)",
+      "result": "Redirected to login page. Use --login or --load-cookies. Exit 1. No media saved."
+    },
+    {
+      "method": "yt-dlp (venv) --flat-playlist --playlist-end 24",
+      "result": "ERROR: [instagram:user] hungrygenspokane: Unable to extract data. Exit 1."
+    },
+    {
+      "method": "Playwright Chromium headless shell, realistic UA, America/Los_Angeles, webdriver hidden",
+      "result": "HTTP 200, stayed on /hungrygenspokane/, title 'HungryGen Spokane (@hungrygenspokane) \u2022 Instagram photos and videos', but hasLogin + PolarisErrorRoot/httpErrorPage, no shortcode, no edge_owner_to_timeline_media."
+    },
+    {
+      "method": "Playwright full Chrome headless (same stealth)",
+      "result": "Redirected to /accounts/login/?next=...&is_from_rle. Login wall."
+    },
+    {
+      "method": "Playwright full Chrome headed (DISPLAY=:38)",
+      "result": "Same as headless shell: profile URL and title present, but error shell with no posts or dates. No media saved."
+    }
+  ],
+  "note": "No photos were saved. Post dates were not fabricated. Homepage announcement slider uses existing Spokane service photos from assets/img/slider/ as the fallback."
+}

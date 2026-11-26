@@ -29,6 +29,12 @@
     return String(n).padStart(2, "0");
   }
 
+  function withBase(url) {
+    if (!url) return url;
+    if (url.charAt(0) === "/" && url.charAt(1) !== "/") return BASE_PATH + url;
+    return url;
+  }
+
   function wallParts(date, tz) {
     var parts = new Intl.DateTimeFormat("en-US", {
       timeZone: tz,
@@ -246,6 +252,7 @@
             (cursor.year === endWall.year && cursor.month > endWall.month) ||
             (cursor.year === endWall.year && cursor.month === endWall.month && cursor.day > endWall.day);
           if (pastEnd) break;
+          if (ev.untilDate && key > ev.untilDate) break;
           if (weekdayOf(cursor.year, cursor.month, cursor.day, tz) === want && !skip[key]) {
             var start = occurrenceStart(cursor.year, cursor.month, cursor.day, ev.startTime || "00:00", tz);
             if (start.getTime() >= now.getTime()) {
@@ -441,11 +448,7 @@
       action.className = "event-card__action";
       var link = document.createElement("a");
       link.className = "btn-detail";
-      var detail = occ.url;
-      if (detail.indexOf("http") !== 0 && detail.charAt(0) === "/") {
-        detail = BASE_PATH + detail;
-      }
-      link.href = detail;
+      link.href = withBase(occ.url);
       link.textContent = "View Detail";
       action.appendChild(link);
       article.appendChild(action);

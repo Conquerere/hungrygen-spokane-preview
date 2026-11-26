@@ -10,11 +10,10 @@
       "byDay": "SU",
       "startTime": "18:00",
       "endTime": "21:00",
-      "location": "Spokane Valley Baptist Church, 1222 S McDonald Rd, Spokane Valley, WA 99216",
+      "location": "Spokane, WA",
       "url": "/events/sunday-service/",
       "exceptions": [],
-      "list": true,
-      "mapUrl": "https://maps.apple.com/?q=1222+S+McDonald+Rd+Spokane+Valley+WA+99216"
+      "list": true
     },
     {
       "id": "corporate-night-prayer",
@@ -23,23 +22,23 @@
       "freq": "weekly",
       "byDay": "FR",
       "startTime": "20:00",
-      "endTime": null,
-      "location": "Spokane Valley Baptist Church, 1222 S McDonald Rd, Spokane Valley, WA 99216",
+      "endTime": "22:00",
+      "location": "Spokane, WA",
       "exceptions": [],
       "list": true,
-      "mapUrl": "https://maps.apple.com/?q=1222+S+McDonald+Rd+Spokane+Valley+WA+99216"
+      "untilDate": "2026-12-25"
     },
     {
-      "id": "evangelism-outreach-2026-11-21",
-      "title": "Evangelism Day",
+      "id": "spokane-prayerline-2027-01-31",
+      "title": "Spokane Prayerline",
       "type": "one-off",
-      "date": "2026-11-21",
-      "startTime": "10:00",
-      "endTime": null,
-      "location": "My Fresh Basket, Kendall Yards, 1030 W Summit Pkwy, Spokane, WA 99201",
-      "description": "Arrive at 10:00 AM. The meeting starts at 10:15 AM sharp, then we split into groups and head out.",
-      "list": true,
-      "mapUrl": "https://maps.apple.com/?q=1030+W+Summit+Pkwy+Spokane+WA+99201"
+      "date": "2027-01-31",
+      "startTime": "18:00",
+      "endTime": "22:00",
+      "location": "Spokane, WA",
+      "description": "This is a local event, not an online event. Come and experience prayer in the power of the Name of Jesus. God is the same yesterday, today and forever and He still sets the captives free, still heals the sick, delivers the oppressed and restores the broken (Hebrews 13:8). Service starts at 6:00 PM but coming to Prayer Line requires to arrive by 4:00 PM for Pre-prayer Preparation.",
+      "url": "https://hungrygenspokane.churchcenter.com/registrations/events/3909543",
+      "list": true
     }
   ]
 }

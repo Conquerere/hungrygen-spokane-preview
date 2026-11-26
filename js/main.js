@@ -148,9 +148,7 @@
         closeMenu({ restoreScroll: !isInPageHash });
       });
     });
-    window.addEventListener("resize", function () {
-      if (window.matchMedia("(min-width: 900px)").matches) closeMenu();
-    });
+    /* The dropdown is used on desktop and mobile, so do not auto-close at 900px. */
   }
 
   var revealNodes = document.querySelectorAll(".reveal");
@@ -319,4 +317,265 @@
   } else {
     setInterval(tick, 60000);
   }
+})();
+
+
+/* Seamless infinite-loop announcement slider.
+   Clones the first and last slides, animates through the clone, then
+   silently resets translateX on transitionend so last→first and first→last
+   never jump back. */
+(function () {
+  "use strict";
+
+  var root = document.querySelector("[data-announce-slider]");
+  if (!root) return;
+
+  var viewport = root.querySelector(".announce-slider__viewport");
+  var track = root.querySelector(".announce-slider__track");
+  var status = root.querySelector("[data-slider-status]");
+  var prevBtn = root.querySelector(".announce-slider__prev");
+  var nextBtn = root.querySelector(".announce-slider__next");
+  var dotsWrap = root.querySelector(".announce-slider__dots");
+  if (!viewport || !track) return;
+
+  var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+  var slides = Array.prototype.slice.call(track.children);
+  var n = slides.length;
+  if (n === 0) return;
+
+  var index = 0; /* real slide 0..n-1 */
+  var pos = 1; /* track position including leading clone */
+  var animating = false;
+  var timer = null;
+  var hovered = false;
+  var INTERVAL = 6500;
+
+  function realSlides() {
+    return Array.prototype.slice.call(track.querySelectorAll(".announce-slider__slide:not(.is-clone)"));
+  }
+
+  function setTransition(on) {
+    if (!on || reduce.matches) {
+      track.style.transition = "none";
+    } else {
+      track.style.transition = "transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1)";
+    }
+  }
+
+  function translate(p) {
+    track.style.transform = "translateX(" + -p * 100 + "%)";
+  }
+
+  function announce() {
+    if (!status) return;
+    var slide = realSlides()[index];
+    var title = slide ? (slide.getAttribute("data-title") || "Announcement " + (index + 1)) : "";
+    status.textContent = "Slide " + (index + 1) + " of " + n + ": " + title;
+  }
+
+  function updateChrome() {
+    var list = realSlides();
+    list.forEach(function (slide, i) {
+      var active = i === index;
+      slide.setAttribute("aria-hidden", active ? "false" : "true");
+      slide.querySelectorAll("a, button").forEach(function (el) {
+        if (active) el.removeAttribute("tabindex");
+        else el.setAttribute("tabindex", "-1");
+      });
+    });
+    if (dotsWrap) {
+      dotsWrap.querySelectorAll(".announce-slider__dot").forEach(function (dot, i) {
+        if (i === index) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
+    }
+    announce();
+  }
+
+  function goTo(nextIndex, direction) {
+    if (n < 2) return;
+    nextIndex = ((nextIndex % n) + n) % n;
+    if (nextIndex === index && direction == null) return;
+    if (animating) return;
+
+    var dest;
+    if (direction === "next" && nextIndex === 0 && index === n - 1) {
+      dest = n + 1; /* trailing clone of first */
+    } else if (direction === "prev" && nextIndex === n - 1 && index === 0) {
+      dest = 0; /* leading clone of last */
+    } else {
+      dest = nextIndex + 1;
+    }
+
+    index = nextIndex;
+    pos = dest;
+    animating = !reduce.matches;
+    setTransition(true);
+    translate(pos);
+    updateChrome();
+    if (reduce.matches) {
+      /* Instant wrap: snap to the real slide, no clone visible. */
+      if (pos === 0 || pos === n + 1) {
+        pos = index + 1;
+        setTransition(false);
+        translate(pos);
+      }
+      animating = false;
+    }
+  }
+
+  function onTransitionEnd(e) {
+    if (e.target !== track) return;
+    if (e.propertyName && e.propertyName !== "transform") return;
+    if (pos === 0) {
+      setTransition(false);
+      pos = n;
+      translate(pos);
+      track.offsetHeight; /* force reflow before restoring transition */
+    } else if (pos === n + 1) {
+      setTransition(false);
+      pos = 1;
+      translate(pos);
+      track.offsetHeight;
+    }
+    setTransition(true);
+    animating = false;
+  }
+
+  function stopTimer() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  function startTimer() {
+    stopTimer();
+    if (reduce.matches || n < 2 || hovered || document.hidden) return;
+    timer = setInterval(function () {
+      goTo(index + 1, "next");
+    }, INTERVAL);
+  }
+
+  /* Build clones and dots once. */
+  var first = slides[0].cloneNode(true);
+  var last = slides[n - 1].cloneNode(true);
+  first.classList.add("is-clone");
+  last.classList.add("is-clone");
+  first.setAttribute("aria-hidden", "true");
+  last.setAttribute("aria-hidden", "true");
+  first.querySelectorAll("a, button").forEach(function (el) {
+    el.setAttribute("tabindex", "-1");
+  });
+  last.querySelectorAll("a, button").forEach(function (el) {
+    el.setAttribute("tabindex", "-1");
+  });
+  track.insertBefore(last, slides[0]);
+  track.appendChild(first);
+
+  if (dotsWrap) {
+    dotsWrap.innerHTML = "";
+    for (var i = 0; i < n; i++) {
+      (function (i) {
+        var dot = document.createElement("button");
+        dot.type = "button";
+        dot.className = "announce-slider__dot";
+        var title = slides[i].getAttribute("data-title") || "Announcement " + (i + 1);
+        dot.setAttribute("aria-label", "Go to slide " + (i + 1) + ": " + title);
+        dot.addEventListener("click", function () {
+          var dir = i === index ? null : i > index || (index === n - 1 && i === 0) ? "next" : "prev";
+          if (index === 0 && i === n - 1) dir = "prev";
+          goTo(i, dir);
+          startTimer();
+        });
+        dotsWrap.appendChild(dot);
+      })(i);
+    }
+  }
+
+  setTransition(false);
+  pos = 1;
+  translate(pos);
+  track.offsetHeight;
+  setTransition(true);
+  updateChrome();
+
+  track.addEventListener("transitionend", onTransitionEnd);
+
+  if (prevBtn) {
+    prevBtn.addEventListener("click", function () {
+      goTo(index - 1, "prev");
+      startTimer();
+    });
+  }
+  if (nextBtn) {
+    nextBtn.addEventListener("click", function () {
+      goTo(index + 1, "next");
+      startTimer();
+    });
+  }
+
+  root.setAttribute("tabindex", "0");
+  root.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowLeft") {
+      e.preventDefault();
+      goTo(index - 1, "prev");
+      startTimer();
+    } else if (e.key === "ArrowRight") {
+      e.preventDefault();
+      goTo(index + 1, "next");
+      startTimer();
+    }
+  });
+
+  function setHover(on) {
+    hovered = on;
+    if (on) stopTimer();
+    else startTimer();
+  }
+  root.addEventListener("mouseenter", function () { setHover(true); });
+  root.addEventListener("mouseleave", function () { setHover(false); });
+  root.addEventListener("focusin", function () { setHover(true); });
+  root.addEventListener("focusout", function (e) {
+    if (!root.contains(e.relatedTarget)) setHover(false);
+  });
+
+  /* Touch / pointer swipe. */
+  var startX = 0;
+  var startY = 0;
+  var tracking = false;
+  viewport.addEventListener("pointerdown", function (e) {
+    if (e.pointerType === "mouse" && e.button !== 0) return;
+    tracking = true;
+    startX = e.clientX;
+    startY = e.clientY;
+    stopTimer();
+  });
+  viewport.addEventListener("pointerup", function (e) {
+    if (!tracking) return;
+    tracking = false;
+    var dx = e.clientX - startX;
+    var dy = e.clientY - startY;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) goTo(index + 1, "next");
+      else goTo(index - 1, "prev");
+    }
+    startTimer();
+  });
+  viewport.addEventListener("pointercancel", function () {
+    tracking = false;
+    startTimer();
+  });
+
+  document.addEventListener("visibilitychange", function () {
+    if (document.hidden) stopTimer();
+    else startTimer();
+  });
+  if (typeof reduce.addEventListener === "function") {
+    reduce.addEventListener("change", function () {
+      startTimer();
+    });
+  }
+
+  startTimer();
 })();
