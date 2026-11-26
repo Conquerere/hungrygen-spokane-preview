@@ -1763,3 +1763,43 @@ html:not(.js) .announce-slider__overlay { padding-bottom: 1.75rem; }
   padding-top: 1rem;
 }
 .visit-facts a { text-decoration: underline; text-underline-offset: 0.15em; }
+
+/* Beliefs Scripture refs & collapsible Q&As */
+.belief-ref {
+  margin-top: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--ink-muted, #5c6670);
+  font-style: italic;
+}
+details.belief-qa {
+  border: 1px solid rgba(43, 52, 59, 0.12);
+  border-radius: 10px;
+  padding: 0;
+  margin-bottom: 0.75rem;
+  background: #fff;
+}
+details.belief-qa summary.belief-q {
+  list-style: none;
+  cursor: pointer;
+  padding: 1rem 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+details.belief-qa summary.belief-q::-webkit-details-marker { display: none; }
+details.belief-qa summary.belief-q::after {
+  content: "+";
+  font-size: 1.25rem;
+  font-weight: 400;
+  line-height: 1;
+  flex-shrink: 0;
+}
+details.belief-qa[open] summary.belief-q::after { content: "−"; }
+details.belief-qa .belief-a {
+  padding: 0 1.25rem 1rem;
+  border-top: 1px solid rgba(43, 52, 59, 0.08);
+}
+details.belief-qa .belief-a p:first-child { margin-top: 0.75rem; }
+details.belief-qa .belief-a p:last-child { margin-bottom: 0; }
