@@ -1803,3 +1803,48 @@ details.belief-qa .belief-a {
 }
 details.belief-qa .belief-a p:first-child { margin-top: 0.75rem; }
 details.belief-qa .belief-a p:last-child { margin-bottom: 0; }
+
+/* ---------- About Us sub-navigation (Who We Are / Team / Beliefs / FAQ / Get Involved) ---------- */
+.subnav {
+  background: var(--color-theme);
+  border-bottom: 3px solid var(--color-gold);
+}
+.subnav__list {
+  display: flex;
+  justify-content: center;
+  gap: 0.25rem;
+  margin: 0 auto;
+  padding: 0.5rem 0;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  scroll-snap-type: x proximity;
+}
+.subnav__list::-webkit-scrollbar { display: none; }
+.subnav__list li { flex: 0 0 auto; scroll-snap-align: start; }
+.subnav__list a {
+  display: inline-block;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.subnav__list a:hover { background: rgba(255, 255, 255, 0.12); }
+.subnav__list a:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 2px; }
+.subnav__list a[aria-current="page"],
+.subnav__list a[aria-current="location"] {
+  background: var(--color-gold);
+  color: var(--color-black);
+}
+@media (max-width: 40rem) {
+  .subnav__list { justify-content: flex-start; padding-inline: 0.25rem; }
+  .subnav__list a { padding: 0.5rem 0.85rem; font-size: 0.75rem; }
+}
+#team, #beliefs { scroll-margin-top: calc(var(--header-h) + 1rem); }
