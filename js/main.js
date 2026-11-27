@@ -166,7 +166,7 @@
           }
         });
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 }
+      { rootMargin: "0px 0px -8% 0px", threshold: 0 }
     );
     revealNodes.forEach(function (el) {
       io.observe(el);
@@ -587,4 +587,94 @@
   if (!active || list.scrollWidth <= list.clientWidth) return;
   var a = active.getBoundingClientRect(), l = list.getBoundingClientRect();
   list.scrollLeft += (a.left - l.left) - (l.width - a.width) / 2;
+})();
+
+/* t77u: instant filter (pills + keyword search) for FAQ and Connect Groups.
+   Markup works without JS (everything visible); the bar is revealed only when JS runs. */
+(function () {
+  "use strict";
+  var roots = document.querySelectorAll("[data-filter-root]");
+  if (!roots.length) return;
+  roots.forEach(function (root) {
+    var bar = root.querySelector("[data-filter-bar]");
+    var items = Array.prototype.slice.call(root.querySelectorAll("[data-tags]"));
+    var sections = Array.prototype.slice.call(root.querySelectorAll("[data-filter-section]"));
+    var search = root.querySelector("[data-filter-search]");
+    var count = root.querySelector("[data-filter-count]");
+    var empty = root.querySelector("[data-filter-empty]");
+    var noun = root.getAttribute("data-filter-noun") || "items";
+    var active = {};
+    if (bar) bar.hidden = false;
+    var texts = items.map(function (it) { return it.textContent.toLowerCase().replace(/\s+/g, " "); });
+
+    function apply() {
+      var terms = search ? search.value.toLowerCase().trim().split(/\s+/).filter(Boolean) : [];
+      var shown = 0;
+      items.forEach(function (it, i) {
+        var tags = " " + (it.getAttribute("data-tags") || "") + " ";
+        var ok = Object.keys(active).every(function (g) {
+          return !active[g] || tags.indexOf(" " + active[g] + " ") > -1;
+        });
+        if (ok && terms.length) {
+          ok = terms.every(function (t) { return texts[i].indexOf(t) > -1; });
+        }
+        it.hidden = !ok;
+        if (ok) shown++;
+      });
+      sections.forEach(function (s) {
+        s.hidden = !s.querySelector("[data-tags]:not([hidden])");
+      });
+      if (count) count.textContent = "Showing " + shown + " of " + items.length + " " + noun;
+      if (empty) empty.hidden = shown > 0;
+    }
+
+    root.querySelectorAll("[data-filter]").forEach(function (pill) {
+      pill.addEventListener("click", function () {
+        var parts = pill.getAttribute("data-filter").split("=");
+        var group = parts[0];
+        var val = parts[1] || "";
+        active[group] = val;
+        root.querySelectorAll('[data-filter^="' + group + '="]').forEach(function (p) {
+          p.setAttribute("aria-pressed", p === pill ? "true" : "false");
+        });
+        apply();
+      });
+    });
+    if (search) {
+      search.addEventListener("input", apply);
+      search.addEventListener("keydown", function (e) {
+        if (e.key === "Escape") { search.value = ""; apply(); }
+      });
+    }
+    var reset = root.querySelector("[data-filter-reset]");
+    if (reset) {
+      reset.addEventListener("click", function () {
+        active = {};
+        if (search) search.value = "";
+        root.querySelectorAll("[data-filter]").forEach(function (p) {
+          p.setAttribute("aria-pressed", /=$/.test(p.getAttribute("data-filter")) ? "true" : "false");
+        });
+        apply();
+      });
+    }
+    apply();
+  });
+})();
+
+/* t77u: open a <details> when the URL hash targets it (or something inside it). */
+(function () {
+  function openFromHash() {
+    var id = decodeURIComponent(location.hash.slice(1));
+    if (!id) return;
+    var el = document.getElementById(id);
+    if (!el) return;
+    var d = el.closest ? el.closest("details") : null;
+    if (el.tagName === "DETAILS") d = el;
+    if (d && !d.open) {
+      d.open = true;
+      requestAnimationFrame(function () { el.scrollIntoView({ block: "start" }); });
+    }
+  }
+  openFromHash();
+  window.addEventListener("hashchange", openFromHash);
 })();
