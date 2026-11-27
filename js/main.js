@@ -579,3 +579,11 @@
 
   startTimer();
 })();
+
+// About Us sub-nav: on narrow screens, scroll the active pill into view.
+(function () {
+  var list = document.querySelector('.subnav__list');
+  var active = list && list.querySelector('[aria-current="page"]');
+  if (!active || list.scrollWidth <= list.clientWidth) return;
+  list.scrollLeft = active.offsetLeft - (list.clientWidth - active.offsetWidth) / 2;
+})();
