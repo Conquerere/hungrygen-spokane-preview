@@ -585,5 +585,6 @@
   var list = document.querySelector('.subnav__list');
   var active = list && list.querySelector('[aria-current="page"]');
   if (!active || list.scrollWidth <= list.clientWidth) return;
-  list.scrollLeft = active.offsetLeft - (list.clientWidth - active.offsetWidth) / 2;
+  var a = active.getBoundingClientRect(), l = list.getBoundingClientRect();
+  list.scrollLeft += (a.left - l.left) - (l.width - a.width) / 2;
 })();
