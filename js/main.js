@@ -34,7 +34,7 @@
   window.addEventListener("scroll", setCondensed, { passive: true });
 
   function focusables(root) {
-    return root ? root.querySelectorAll("a[href], button:not([disabled])") : [];
+    return root ? root.querySelectorAll("a[href], button:not([disabled]), summary") : [];
   }
 
   function menuFocusables() {
@@ -146,6 +146,16 @@
         /* Same-page hashes should scroll to the target, not back to the pre-open offset. */
         var isInPageHash = href.charAt(0) === "#";
         closeMenu({ restoreScroll: !isInPageHash });
+      });
+    });
+    /* Keep only one menu group open so the list stays compact. */
+    var groups = drawer.querySelectorAll(".nav-drawer__group");
+    groups.forEach(function (group) {
+      group.addEventListener("toggle", function () {
+        if (!group.open) return;
+        groups.forEach(function (other) {
+          if (other !== group) other.open = false;
+        });
       });
     });
     /* The dropdown is used on desktop and mobile, so do not auto-close at 900px. */
@@ -348,7 +358,7 @@
   var animating = false;
   var timer = null;
   var hovered = false;
-  var INTERVAL = 6500;
+  var INTERVAL = 6000;
 
   function realSlides() {
     return Array.prototype.slice.call(track.querySelectorAll(".announce-slider__slide:not(.is-clone)"));
@@ -358,7 +368,7 @@
     if (!on || reduce.matches) {
       track.style.transition = "none";
     } else {
-      track.style.transition = "transform 0.55s cubic-bezier(0.22, 0.61, 0.36, 1)";
+      track.style.transition = "transform 1.2s cubic-bezier(0.45, 0, 0.55, 1)";
     }
   }
 

@@ -119,7 +119,7 @@
       </a>
       <nav class="nav-primary" aria-label="Primary">
         <a href="/hungrygen-spokane-preview/new/">I’m New</a>
-        <a href="/hungrygen-spokane-preview/who-we-are/">Who We Are / Meet the Team</a>
+        <a href="/hungrygen-spokane-preview/who-we-are/">Who We Are</a>
         <a href="/hungrygen-spokane-preview/connect-groups/" aria-current="page">Connect Groups</a>
         <a href="/hungrygen-spokane-preview/faq/">FAQ</a>
         <a href="/hungrygen-spokane-preview/get-involved/">Get Involved</a>
@@ -139,16 +139,30 @@
   <div class="nav-backdrop" id="nav-backdrop" hidden></div>
   <nav class="nav-drawer" id="mobile-nav" aria-label="Menu" hidden>
     <div class="wrap">
-      <a href="/hungrygen-spokane-preview/new/">I’m New</a>
-      <a href="/hungrygen-spokane-preview/who-we-are/">Who We Are / Meet the Team</a>
-      <a href="/hungrygen-spokane-preview/connect-groups/" aria-current="page">Connect Groups</a>
-      <a href="/hungrygen-spokane-preview/faq/">FAQ</a>
-      <a href="/hungrygen-spokane-preview/get-involved/">Get Involved</a>
-      <a href="/hungrygen-spokane-preview/kids/">Kids</a>
-      <a href="/hungrygen-spokane-preview/building/">Building Fund</a>
-      <a href="/hungrygen-spokane-preview/events/">Events</a>
-      <a href="https://hungrygenspokane.churchcenter.com/giving" target="_blank" rel="noopener noreferrer">Give</a>
-      <a class="btn btn-primary drawer-cta" href="/hungrygen-spokane-preview/new/">Plan a visit</a>
+      <details class="nav-drawer__group">
+        <summary class="nav-drawer__summary">About</summary>
+        <div class="nav-drawer__sub">
+          <a href="/hungrygen-spokane-preview/who-we-are/">Who We Are &amp; Team</a>
+          <a href="/hungrygen-spokane-preview/kids/">Kids</a>
+          <a href="/hungrygen-spokane-preview/faq/">FAQ</a>
+        </div>
+      </details>
+      <details class="nav-drawer__group" open>
+        <summary class="nav-drawer__summary">Connect</summary>
+        <div class="nav-drawer__sub">
+          <a href="/hungrygen-spokane-preview/connect-groups/" aria-current="page">Connect Groups</a>
+          <a href="/hungrygen-spokane-preview/get-involved/">Get Involved</a>
+          <a href="/hungrygen-spokane-preview/events/">Events</a>
+        </div>
+      </details>
+      <details class="nav-drawer__group">
+        <summary class="nav-drawer__summary">Give</summary>
+        <div class="nav-drawer__sub">
+          <a href="https://hungrygenspokane.churchcenter.com/giving" target="_blank" rel="noopener noreferrer">Give Online</a>
+          <a href="/hungrygen-spokane-preview/building/">New Building Fund</a>
+        </div>
+      </details>
+      <a class="btn btn-primary drawer-cta" href="/hungrygen-spokane-preview/new/">I’m New — Plan a Visit</a>
     </div>
   </nav>
 
