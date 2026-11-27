@@ -158,6 +158,19 @@
         });
       });
     });
+    /* Mobile footer: only one link group open at a time. */
+    var footerGroups = document.querySelectorAll(".site-footer .footer-group");
+    function footerMobile() {
+      return window.matchMedia("(max-width: 799px)").matches;
+    }
+    footerGroups.forEach(function (group) {
+      group.addEventListener("toggle", function () {
+        if (!group.open || !footerMobile()) return;
+        footerGroups.forEach(function (other) {
+          if (other !== group) other.open = false;
+        });
+      });
+    });
     /* The dropdown is used on desktop and mobile, so do not auto-close at 900px. */
   }
 
@@ -656,6 +669,11 @@
         if (e.key === "Escape") { search.value = ""; apply(); }
       });
     }
+    root.querySelectorAll("[data-filter][aria-pressed='true']").forEach(function (pill) {
+      var parts = (pill.getAttribute("data-filter") || "").split("=");
+      if (parts[0]) active[parts[0]] = parts[1] || "";
+    });
+    apply();
     var reset = root.querySelector("[data-filter-reset]");
     if (reset) {
       reset.addEventListener("click", function () {

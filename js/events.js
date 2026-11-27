@@ -360,6 +360,12 @@
   }
 
   function buildShareList(title, url) {
+    var details = document.createElement("details");
+    details.className = "share-disclosure";
+    var summary = document.createElement("summary");
+    summary.className = "share-disclosure__btn";
+    summary.textContent = "Share";
+    details.appendChild(summary);
     var ul = document.createElement("ul");
     ul.className = "share-list share-list--labeled";
     var enc = shareUrl(url);
@@ -381,7 +387,8 @@
       li.appendChild(a);
       ul.appendChild(li);
     }
-    return ul;
+    details.appendChild(ul);
+    return details;
   }
 
   function buildCard(occ) {
