@@ -359,6 +359,7 @@
   var prevBtn = root.querySelector(".announce-slider__prev");
   var nextBtn = root.querySelector(".announce-slider__next");
   var dotsWrap = root.querySelector(".announce-slider__dots");
+  var pauseBtn = root.querySelector("[data-slider-pause]");
   if (!viewport || !track) return;
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -371,6 +372,7 @@
   var animating = false;
   var timer = null;
   var hovered = false;
+  var userPaused = reduce.matches;
   var INTERVAL = 6000;
 
   function realSlides() {
@@ -474,10 +476,18 @@
 
   function startTimer() {
     stopTimer();
-    if (reduce.matches || n < 2 || hovered || document.hidden) return;
+    if (userPaused || n < 2 || hovered || document.hidden) return;
     timer = setInterval(function () {
       goTo(index + 1, "next");
     }, INTERVAL);
+  }
+
+  function updatePauseBtn() {
+    if (!pauseBtn) return;
+    var paused = userPaused || n < 2;
+    pauseBtn.classList.toggle("is-paused", paused);
+    pauseBtn.setAttribute("aria-pressed", paused ? "true" : "false");
+    pauseBtn.setAttribute("aria-label", paused ? "Play announcements" : "Pause announcements");
   }
 
   /* Build clones and dots once. */
@@ -535,6 +545,14 @@
     nextBtn.addEventListener("click", function () {
       goTo(index + 1, "next");
       startTimer();
+    });
+  }
+  if (pauseBtn) {
+    pauseBtn.addEventListener("click", function () {
+      userPaused = !userPaused;
+      updatePauseBtn();
+      if (userPaused) stopTimer();
+      else startTimer();
     });
   }
 
@@ -596,10 +614,13 @@
   });
   if (typeof reduce.addEventListener === "function") {
     reduce.addEventListener("change", function () {
+      if (reduce.matches) userPaused = true;
+      updatePauseBtn();
       startTimer();
     });
   }
 
+  updatePauseBtn();
   startTimer();
 })();
 
