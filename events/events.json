@@ -25,9 +25,10 @@
       "startTime": "20:00",
       "endTime": "22:00",
       "location": "115 E Pacific Ave #209, Spokane, WA 99202",
-      "exceptions": [],
+      "exceptions": [
+        "2026-12-25"
+      ],
       "list": true,
-      "untilDate": "2026-12-25",
       "mapUrl": "https://maps.apple.com/?q=115+E+Pacific+Ave%2C+%23209%2C+Spokane%2C+WA+99202"
     },
     {
