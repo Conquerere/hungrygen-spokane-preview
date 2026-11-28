@@ -585,6 +585,130 @@
     root.setAttribute("data-datetime", isoFromOcc(next, data));
   }
 
+  var MONTH_SHORT = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var WEEKDAY_SHORT = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  var COMING_UP_MAX = 4;
+
+  function escapeHtml(s) {
+    return String(s || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;");
+  }
+
+  function formatStartClock(startTime) {
+    return formatClock(parseHM(startTime || "00:00"));
+  }
+
+  function comingUpHref(occ) {
+    return withBase(occ.url || "/events/");
+  }
+
+  function comingUpShortLine(occ) {
+    if (occ.id && occ.id.indexOf("prayerline") !== -1) {
+      return "Service starts at 6:00 PM. Arrive by 4:00 PM for pre-prayer preparation.";
+    }
+    return "";
+  }
+
+  function comingUpExceptionNote(data, now) {
+    var tz = data.timezone || DEFAULT_TZ;
+    var today = wallParts(now, tz);
+    var todayKey = ymdKey(today.year, today.month, today.day);
+    var events = data.events || [];
+    for (var i = 0; i < events.length; i++) {
+      var list = events[i].exceptions || [];
+      for (var j = 0; j < list.length; j++) {
+        if (list[j] < todayKey) continue;
+        if (events[i].id === "corporate-night-prayer" && list[j] === "2026-12-25") {
+          return "No Prayer Night Dec 25 – Merry Christmas";
+        }
+      }
+    }
+    return "";
+  }
+
+  function renderComingUpItem(occ) {
+    var href = comingUpHref(occ);
+    var external = href.indexOf("http") === 0;
+    var dateLabel = WEEKDAY_SHORT[occ.weekday] + ", " + MONTH_SHORT[occ.month - 1] + " " + occ.day + ", " + occ.year;
+    var datetime = ymdKey(occ.year, occ.month, occ.day);
+    var line = comingUpShortLine(occ);
+    var target = external ? ' target="_blank" rel="noopener noreferrer"' : "";
+    var html =
+      "<li>" +
+      '<a class="coming-item" href="' + escapeHtml(href) + '"' + target + ">" +
+      '<time class="coming-item__date" datetime="' + datetime + '" aria-label="' + escapeHtml(dateLabel) + '">' +
+      '<span class="coming-item__month">' + MONTH_SHORT[occ.month - 1] + "</span>" +
+      '<span class="coming-item__day">' + occ.day + "</span>" +
+      '<span class="coming-item__weekday">' + WEEKDAY_SHORT[occ.weekday] + "</span>" +
+      "</time>" +
+      '<span class="coming-item__body">' +
+      '<strong class="coming-item__title">' + escapeHtml(occ.title) + "</strong>" +
+      '<span class="coming-item__meta">' + escapeHtml(formatStartClock(occ.startTime)) + "</span>" +
+      (line ? '<span class="coming-item__note">' + escapeHtml(line) + "</span>" : "") +
+      "</span></a></li>";
+    return html;
+  }
+
+  function renderComingUpGroup(title, items) {
+    if (!items.length) return "";
+    var html = '<div class="coming-up__group">';
+    html += '<h3 class="coming-up__label">' + escapeHtml(title) + "</h3>";
+    html += '<ul class="coming-list">';
+    for (var i = 0; i < items.length; i++) html += renderComingUpItem(items[i]);
+    html += "</ul></div>";
+    return html;
+  }
+
+  function renderComingUp(data, now) {
+    var root = document.getElementById("coming-up-events");
+    if (!root) return;
+    var tz = data.timezone || DEFAULT_TZ;
+    var today = wallParts(now, tz);
+    var todayKey = ymdKey(today.year, today.month, today.day);
+    var weekEnd = addCalendarDays(today.year, today.month, today.day, 6);
+    var weekEndKey = ymdKey(weekEnd.year, weekEnd.month, weekEnd.day);
+    var occs = expandData(data, now);
+    var thisWeek = [];
+    var thisMonth = [];
+    var later = [];
+    var i;
+    for (i = 0; i < occs.length; i++) {
+      var occ = occs[i];
+      var key = ymdKey(occ.year, occ.month, occ.day);
+      if (key >= todayKey && key <= weekEndKey) thisWeek.push(occ);
+      else if (occ.year === today.year && occ.month === today.month) thisMonth.push(occ);
+      else later.push(occ);
+    }
+    function isRoutine(occ) {
+      return occ.id === "sunday-service" || occ.id === "corporate-night-prayer";
+    }
+    var laterSpecials = later.filter(function (occ) { return !isRoutine(occ); });
+    var max = COMING_UP_MAX;
+    var weekShow = thisWeek.slice(0, max);
+    max -= weekShow.length;
+    var monthShow = thisMonth.slice(0, max);
+    max -= monthShow.length;
+    var laterShow = laterSpecials.slice(0, max);
+    if (!weekShow.length && !monthShow.length && !laterShow.length) {
+      laterShow = later.slice(0, COMING_UP_MAX);
+    }
+
+    var html = "";
+    html += renderComingUpGroup("This week", weekShow);
+    html += renderComingUpGroup("This month", monthShow);
+    html += renderComingUpGroup("Coming later", laterShow);
+    var note = comingUpExceptionNote(data, now);
+    if (note) html += '<p class="coming-up__note">' + escapeHtml(note) + "</p>";
+    if (!weekShow.length && !monthShow.length && !laterShow.length) {
+      html = '<p class="coming-up__empty">See the events page for what’s ahead.</p>';
+      if (note) html += '<p class="coming-up__note">' + escapeHtml(note) + "</p>";
+    }
+    root.innerHTML = html;
+  }
+
   function init(data, now) {
     var archive = document.getElementById("event-archive");
     if (archive) {
@@ -592,6 +716,7 @@
       setupLoadMore(archive);
     }
     applyCountdown(data, now);
+    renderComingUp(data, now);
   }
 
   function loadAndInit() {
