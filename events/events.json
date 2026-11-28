@@ -10,10 +10,11 @@
       "byDay": "SU",
       "startTime": "18:00",
       "endTime": "21:00",
-      "location": "Spokane, WA",
+      "location": "115 E Pacific Ave #209, Spokane, WA 99202",
       "url": "/events/sunday-service/",
       "exceptions": [],
-      "list": true
+      "list": true,
+      "mapUrl": "https://maps.apple.com/?q=115+E+Pacific+Ave%2C+%23209%2C+Spokane%2C+WA+99202"
     },
     {
       "id": "corporate-night-prayer",
@@ -23,10 +24,11 @@
       "byDay": "FR",
       "startTime": "20:00",
       "endTime": "22:00",
-      "location": "Spokane, WA",
+      "location": "115 E Pacific Ave #209, Spokane, WA 99202",
       "exceptions": [],
       "list": true,
-      "untilDate": "2026-12-25"
+      "untilDate": "2026-12-25",
+      "mapUrl": "https://maps.apple.com/?q=115+E+Pacific+Ave%2C+%23209%2C+Spokane%2C+WA+99202"
     },
     {
       "id": "spokane-prayerline-2027-01-31",
@@ -35,10 +37,11 @@
       "date": "2027-01-31",
       "startTime": "18:00",
       "endTime": "22:00",
-      "location": "Spokane, WA",
+      "location": "115 E Pacific Ave #209, Spokane, WA 99202",
       "description": "This is a local event, not an online event. Come and experience prayer in the power of the Name of Jesus. God is the same yesterday, today and forever and He still sets the captives free, still heals the sick, delivers the oppressed and restores the broken (Hebrews 13:8). Service starts at 6:00 PM but coming to Prayer Line requires to arrive by 4:00 PM for Pre-prayer Preparation.",
       "url": "https://hungrygenspokane.churchcenter.com/registrations/events/3909543",
-      "list": true
+      "list": true,
+      "mapUrl": "https://maps.apple.com/?q=115+E+Pacific+Ave%2C+%23209%2C+Spokane%2C+WA+99202"
     }
   ]
 }
